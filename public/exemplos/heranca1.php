@@ -44,7 +44,17 @@ class Carro extends Veiculo{
     public function ligarParaBrisa(){
         echo " {$this->nomeClasse} ligou o para-brisa <br>";
     }
-}
+
+   
+
+} 
+
+class Moto extends Veiculo{
+    public function ligarPiscaAlerta(){
+        echo "{$this->nomeClasse} ligou o pisca alerta";
+    }
+} 
+
 
 
 //$marca1= new Veiculo("chevollet", "hibrido");
