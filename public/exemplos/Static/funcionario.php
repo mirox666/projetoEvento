@@ -9,4 +9,12 @@
 
             echo "Olá " .self::$nome. " Seu salario é ".self::$salario. " Reais";
         }
+
+        public static function getSalario(){
+            return self::$salario;
+        }
+
+        public static function setSalario($valor){
+             self::$salario = $valor;
+        }
     }
