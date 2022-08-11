@@ -3,9 +3,10 @@ class Evento{
     // Atributos 
     public $nomeEvento;
     public $dataEvento;
-
+    public $banner;
+    public $mensagem = [];// Esse atributo irá armazenar as mensagens de erro e sucesso.
     //Metodos:"Comportamentos"
-    function validaData($data){ 
+    public function validaData($data){ 
 
         $dataEvento = new DateTime($data);// Está classe precisa de uma data no padrão americano para funcionar
         $dataAtual = new DateTime("now");// Estamos pegando a data atual 
@@ -14,17 +15,62 @@ class Evento{
         print_r($dataAtual);
     
         if($dataEvento > $dataAtual){
-            echo "<p>Data do Evento cadastrado com sucesso !!!</p>";
+            return true;
+            //echo "<p>Data do Evento cadastrado com sucesso !!!</p>";
         }
         else{
-            echo "<p>A data do evento não pode ser anterior ou igual à data atual</p>";
+            return false;
+            //echo "<p>A data do evento não pode ser anterior ou igual à data atual</p>";
         }
     }
 
-    function recebeDados($campos){
+    public function recebeDados($campos){
         $this->nomeEvento = $campos["nomeEvento"];
         $this->dataEvento =$campos["dataEvento"];
+        if(empty($this->nomeEvento)|| empty($this->dataEvento)){
+            return false;
+        }
+        else{
+            return true;
+        }
         echo "O {$this->nomeEvento} vai acontercer na data {$this->dataEvento}";
+    }
+// Essa função irá receber o comando $_FILES['nome_//arquivo']
+    public function recebeArquivo($banner){
+        
+        //$nomeArquivo = $_FILES["banner"]["name"];
+        //$nomeTemporario = $_FILES["banner"]["tmp_name"];
+        $this->banner = $banner;// Estou atribuindo $_FILES["banner"] para $this->banner 
+
+        if(empty($this->banner['name'])){
+        echo "<br> Arquivo vazio";
+        }
+        else{
+            echo "<br> Arquivo aceito";
+            $infoArquivo = pathinfo($this->banner["name"]);//Retorna um array com informações mais detalhadas do Arquivo
+            echo "<br>";
+            echo "<pre>";
+                print_r($infoArquivo);
+            echo "</pre>";
+            if($infoArquivo["extension"]== "jpg" || "webp" || "png"){
+                echo"<br> Formato de arquivo aceito";
+                
+                //Copiando imagem para o servidor.
+                $pasta = "../imagens/";
+                //Iremos verificar se a pasta existe ou não.
+                if(!file_exists($pasta)){
+                    mkdir($pasta,0777,true);// A função mkdir() Precisa de 3 parâmetros: 1-> nome da pasta; 2-> permisão para ler e escrever na pasta; 3-> Se irá criar subpastas ou não.
+                }
+
+                $caminhoFinal = $pasta.$this->banner["name"];
+                move_uploaded_file($this->banner["tmp_name"],$caminhoFinal);
+                echo "<img src='{$caminhoFinal}'width = '200px' height'200px'>";
+            }   
+            else{
+                echo"<br> Formato de arquivo invalida";
+            } 
+        }
+    
     }
 }
 //Instanciando um objeto
