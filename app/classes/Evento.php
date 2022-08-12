@@ -1,11 +1,33 @@
 <?php
 class Evento{
     // Atributos 
-    public $nomeEvento;
-    public $dataEvento;
-    public $banner;
-    public $mensagem = [];// Esse atributo irá armazenar as mensagens de erro e sucesso.
+    private $nomeEvento;
+    private $dataEvento;
+    private $banner;
+    private $mensagem = [];// Esse atributo irá armazenar as mensagens de erro e sucesso.
     //Metodos:"Comportamentos"
+
+    public function inicio($campos,$arquivo){
+        //Verificar se os campos estão em branco
+        if($this->recebeDados($campos)){
+            $this->mensagem = [
+                "status" => true,
+                "msg " => 'Dados preenchidos com sucesso'
+            ];
+            print_r($this->mensagem);
+        }
+        else{
+            $this->mensagem = [
+                "status" => false,
+                "msg" => "Os campos nao podem ficar em branco"
+            ];
+            print_r($this->mensagem);
+        }
+    }
+    
+    
+    
+    
     public function validaData($data){ 
 
         $dataEvento = new DateTime($data);// Está classe precisa de uma data no padrão americano para funcionar
@@ -43,18 +65,21 @@ class Evento{
         $this->banner = $banner;// Estou atribuindo $_FILES["banner"] para $this->banner 
 
         if(empty($this->banner['name'])){
-        echo "<br> Arquivo vazio";
+            return false;
+            //echo "<br> Arquivo vazio";
         }
         else{
-            echo "<br> Arquivo aceito";
+           // echo "<br> Arquivo aceito";
             $infoArquivo = pathinfo($this->banner["name"]);//Retorna um array com informações mais detalhadas do Arquivo
+            /*
             echo "<br>";
             echo "<pre>";
                 print_r($infoArquivo);
             echo "</pre>";
+            */
             if($infoArquivo["extension"]== "jpg" || "webp" || "png"){
-                echo"<br> Formato de arquivo aceito";
                 
+                // echo"<br> Formato de arquivo aceito";
                 //Copiando imagem para o servidor.
                 $pasta = "../imagens/";
                 //Iremos verificar se a pasta existe ou não.
@@ -64,10 +89,12 @@ class Evento{
 
                 $caminhoFinal = $pasta.$this->banner["name"];
                 move_uploaded_file($this->banner["tmp_name"],$caminhoFinal);
-                echo "<img src='{$caminhoFinal}'width = '200px' height'200px'>";
+                return true;
+                //echo "<img src='{$caminhoFinal}'width = '200px' height'200px'>";
             }   
             else{
-                echo"<br> Formato de arquivo invalida";
+                return false;
+                //echo"<br> Formato de arquivo invalida";
             } 
         }
     
@@ -77,4 +104,4 @@ class Evento{
 $meuEvento = new Evento();
 print_r($meuEvento);
 echo "<hr>";
-$meuEvento-> recebeDados($_POST);
+$meuEvento-> inicio($_POST,$_FILES);
