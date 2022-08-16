@@ -6,7 +6,10 @@ class Evento{
     private $banner;
     private $mensagem = [];// Esse atributo irá armazenar as mensagens de erro e sucesso.
     //Metodos:"Comportamentos"
-
+    /**
+     * @param $campos: este parâmetro espera receber uma constante $_POST
+     * @param $arquivo: este parâmetro espera receber um valor do como por exemplo $_FILES'[banner]'
+     */
     public function inicio($campos,$arquivo){
         //Verificar se os campos estão em branco
         if($this->recebeDados($campos)){
