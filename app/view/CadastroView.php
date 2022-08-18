@@ -36,24 +36,31 @@ session_start();
             </div>                       
         </nav>
     </header>
-
-    <main class="container-fluid mt-5">
-        <?php
+    <?php
         //isset verifica se alguma variável existe
             if(isset($_SESSION["mensagem"])){
                 if($_SESSION["mensagem"]["status"]){
                     echo "
                         <div class='alert alert-success alert-dismissible fade show'> 
-
+                            <h4 class='text-center'>{$_SESSION['mensagem']['msg']}</h4>
+                            <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
                         </div>
                     ";
                 }
                 else{
-
+                    echo "
+                        <div class='alert alert-danger alert-dismissible fade show'> 
+                            <h4 class='text-center'>{$_SESSION['mensagem']['msg']}</h4>
+                            <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
+                        </div>
+                    ";
                 }
             }
+            unset($_SESSION["mensagem"]); // Destruindo a variável de sessão
         ?>
-        <h1 class="text-center fw-bold">Cadastre um novo eventos</h1>
+    <main class="container-fluid mt-5">
+  
+        <h1 class="text-center fw-bold">Cadastre um novo evento</h1>
         <hr>
         <form action="../controller/eventoController.php" method="POST" class="mt-5" enctype="multipart/form-data">
             <section class="container col-md-6">
