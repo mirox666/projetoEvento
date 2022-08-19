@@ -118,6 +118,9 @@ class Evento{
         }
     
     }
+    public function __get($atributo){
+        return $this-> $atributo;
+    }
 }
 //Instanciando um objeto
 
