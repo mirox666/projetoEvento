@@ -10,5 +10,8 @@ $_SESSION["mensagem"] = $meuEvento->inicio($_POST,$_FILES['banner']);
 if($_SESSION["mensagem"]["status"]){
     $meuEventoDAO->inserir($meuEvento);
 }
-header("Location:../view/CadastroView.php");// redirecionando o usuário para a página CadastroView.php
-die();
+//header("Location:../view/CadastroView.php");// redirecionando o usuário para a página CadastroView.php
+//die();
+echo"<pre>";
+print_r($meuEventoDAO->consultar());
+echo"</pre>";

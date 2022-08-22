@@ -108,6 +108,7 @@ class Evento{
 
                 $caminhoFinal = $pasta.$this->banner["name"];
                 move_uploaded_file($this->banner["tmp_name"],$caminhoFinal);
+                $this->banner = $caminhoFinal;
                 return true;
                 //echo "<img src='{$caminhoFinal}'width = '200px' height'200px'>";
             }   
