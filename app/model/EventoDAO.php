@@ -24,14 +24,23 @@ class EventoDAO{
         }
     }
 
-    public function consultar(){
+    public function consultar($dataBR = false){
      $sql = "SELECT * FROM {$this->tabela}";
      $preparacao = Conexao::getConexao()->prepare($sql);
      
      $preparacao->execute();
      
      if($preparacao->rowCount() > 0){
-        return $preparacao->fetchALL(PDO::FETCH_ASSOC); // O método fecthALL() retorna todos os registros do banco de dados e o valor PDO::FECTH_ASSOC, faz associação dos nosmes dos campos da tabela com os indices do vetor.  
+        $resultado = $preparacao->fetchALL(PDO::FETCH_ASSOC); // O método fecthALL() retorna todos os registros do banco de dados e o valor PDO::FECTH_ASSOC, faz associação dos nomes dos campos da tabela com os indices do vetor. 
+        if($dataBR){
+
+        foreach($resultado as $indice =>$itens){
+            $data = new DateTime($itens["data_evento"]);
+            $resultado[$indice]["data_evento"] = $data->format("d/m/Y");
+    }
+        
+        }
+            return $resultado; 
      }
      else{
         return false ;
