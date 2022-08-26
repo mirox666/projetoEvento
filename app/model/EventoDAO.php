@@ -37,20 +37,32 @@ class EventoDAO{
         foreach($resultado as $indice =>$itens){
             $data = new DateTime($itens["data_evento"]);
             $resultado[$indice]["data_evento"] = $data->format("d/m/Y");
-    }
-        
         }
+        
+            }
             return $resultado; 
      }
      else{
         return false ;
      }
     }
-
-    public function atualizar(){
-
-    }
-    public function deletar(){
-
-    }
+    public function consultarUnico($id){
+        $sql = "SELECT * FROM {$this->tabela} WHERE id_evento = :id";
+        $preparacao = Conexao::getConexao()->prepare($sql);
+        $preparacao->bindValue(":id",$id);
+        
+        $preparacao->execute();
+        
+        if($preparacao->rowCount() > 0){
+           return  $preparacao->fetchALL(PDO::FETCH_ASSOC); // O método fecthALL() retorna todos os registros do banco de dados e o valor PDO::FECTH_ASSOC, faz associação dos nomes dos campos da tabela com os indices do vetor. 
+        
+        }
+        else{
+           return false ;
+        }
+    }    
+    public function atualizar(){}
+    
+    public function deletar(){}
+       
 }
