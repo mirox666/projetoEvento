@@ -27,13 +27,13 @@ $evento = new EventoDAO();
                     
                         <div class="card-footer">
                             <form action="AtualizarEventoView.php" method="post" class="d-flex justify-content-around">
-                                <button type="submit" class="btn btn-info col-5 d-flex justify-content-center align-items-center">
+                                 <button type="submit" class="btn btn-info col-5 d-flex justify-content-center align-items-center">
                                     Editar <span class="material-symbols-outlined ms-2">edit</span>
                                 </button>
                                 <!--o campo hidden irá armazenar, de forma oculta, o id de cada item do banco de dados-->
                                 <input type="hidden" name="id_evento" value="<?=$elementos['id_evento']?>">
 
-                                <button type="submit" class="btn btn-danger col-5 d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-danger col-5 d-flex justify-content-center align-items-center">
                                     Excluir <span class="material-symbols-outlined ms-2">delete</span>
                                 </button>
                             </form>
