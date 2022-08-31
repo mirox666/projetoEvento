@@ -3,6 +3,8 @@ include_once ("../includes/cabecalho.php");
 require_once ("../model/EventoDAO.php");
 
 $evento = new EventoDAO();
+
+unset($_SESSION['id_evento']);// estamos destruindo a variável de sessão que está sendo criada na pagina AtualizarEventoView de forma que outros valores possam ser atribuidos a ela.
 ?>
 
 <main class="container-fluid mt-5">

@@ -19,7 +19,8 @@ die();
 if(isset($_POST['atualizar'])){
     $_SESSION['atualizar'] = $meuEvento->inicio($_POST,$_FILES['banner']);
     if($_SESSION['atualizar']['status']){
-        $meuEventoDAO->atualizar($meuEvento, $_POST['atualizar']); // estamos passando com parâmetro um objeto Evento e o id do evento que está atribuido $_POST['atualizar']
+    $meuEventoDAO->atualizar($meuEvento, $_POST['atualizar']) ; // estamos passando com parâmetro um objeto Evento e o id do evento que está atribuido $_POST['atualizar']
+        
     }
     header("Location:../view/AtualizarEventoView.php");
     die();

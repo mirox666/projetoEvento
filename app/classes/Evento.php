@@ -110,7 +110,7 @@ class Evento{
                 $novoNome = new DateTime();
                 //echo "<hr>".$novoNome->getTimestamp();
                 $nomeFinal = $novoNome->getTimestamp().".".$infoArquivo["extension"];
-                echo"<hr>".$nomeFinal;
+                // echo"<hr>".$nomeFinal;
 
 
                 $caminhoFinal = $pasta.$nomeFinal;

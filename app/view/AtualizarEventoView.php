@@ -46,7 +46,7 @@
                     <label for="dataEvento" class="form-label fw-bold">
                         Data do evento <span class="text-danger">*</span>
                     </label>
-                    <input type="date" name="dataEvento" id="dataEvento" class="form-control" value="<?=$elemento['data_evento']?>>
+                    <input type="date" name="dataEvento" id="dataEvento" class="form-control" value="<?=$elemento['data_evento']?>"
                 </div>
 
                 <div class="row mb-3">
