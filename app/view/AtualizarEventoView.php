@@ -46,8 +46,8 @@
                     <label for="dataEvento" class="form-label fw-bold">
                         Data do evento <span class="text-danger">*</span>
                     </label>
-                    <input type="date" name="dataEvento" id="dataEvento" class="form-control" value="<?=$elemento['data_evento']?>"
-                </div>
+                    <input type="date" name="dataEvento" id="dataEvento" class="form-control" value="<?=$elemento['data_evento']?>"> 
+                    </div>
 
                 <div class="row mb-3">
                     <label for="banner" class="form-label fw-bold">
@@ -55,16 +55,14 @@
                     </label>
                     <input type="file" name="banner" id="banner" class="form-control" accept="image/*">
                 </div>
-                    <input type="hidden" name="atualizar" value="<?=$elemento?>">
+                    <input type="hidden" name="atualizar" value="<?=$elemento['id_evento']?>">
                 <button type="submit" class="btn btn-primary my-3 col-12">Atualizar</button>
             </section>
         </form>
        
     </main>
 
-
-
-
+      
 
     <?php
     include_once ("../includes/rodape.php");

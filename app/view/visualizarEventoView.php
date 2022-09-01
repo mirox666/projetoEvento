@@ -35,7 +35,7 @@ unset($_SESSION['id_evento']);// estamos destruindo a variável de sessão que e
                                 <!--o campo hidden irá armazenar, de forma oculta, o id de cada item do banco de dados-->
                                 <input type="hidden" name="id_evento" value="<?=$elementos['id_evento']?>">
 
-                                <button type="button" class="btn btn-danger col-5 d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-danger col-5 d-flex justify-content-center align-items-center excluir" data-bs-toggle="modal" data-bs-target="#modalExcluir" id="<?=$elementos['id_evento']?>">
                                     Excluir <span class="material-symbols-outlined ms-2">delete</span>
                                 </button>
                             </form>
@@ -50,6 +50,30 @@ unset($_SESSION['id_evento']);// estamos destruindo a variável de sessão que e
     ?>
     </section>
 </main>
+
+          <!--Modal para excluir  -->
+    <section class="modal fade" id="modalExcluir">
+    
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atenção</h5>
+                <button class="btn-close" data-bs-dismiss = "modal"></button>
+            </div>
+            <form action="../controller/eventoController.php" method="POST">
+                <div class="modal-body">
+                    tem certeza que deseja excluir esse evento?
+                    <input type="hidden" name="excluir" id="excluirEvento">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger" id="confirmar">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    </section>    
 
 <?php
 include_once ("../includes/rodape.php");
